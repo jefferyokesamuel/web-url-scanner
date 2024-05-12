@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"io/ioutil"
+	"ioutil"
 	"net/http"
 	"strings"
 )
@@ -20,6 +23,9 @@ func checkURL(url string) {
 			file += ".txt"
 
 			fmt.Printf("Writing URL body into %s\n", file)
+
+			err = ioutil.WriteFile(file, bodyBytes, 0664)
+			
 		}
 
 
