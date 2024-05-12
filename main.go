@@ -6,7 +6,9 @@ import (
 	"net/http"
 	"os"
 	"io"
+	"bufio"
 	"strings"
+	"github.com/Delta456/box-cli-maker/v2"
 )
 
 func checkURL(url string) {
@@ -33,10 +35,20 @@ func checkURL(url string) {
 }
 
 func main() {
-	urls := []string{"https://golang.org", "https://github.com", "https://medium.com"}
+	Box := box.New(box.Config{Px: 30, Py: 5, Type: "Single", Color: "Cyan"})
+	Box.Print("Golang URL Scanner", "Enter a url you want to scan")
+	scanner := bufio.NewScanner(os.Stdin)
+    scanner.Scan()
+    err := scanner.Err()
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	for _, url := range urls{
-		checkURL(url)
-		fmt.Println(strings.Repeat("*", 20))
-	}
+	checkURL(string(scanner.Text()))
+// 	urls := []string{"https://golang.org", "https://github.com", "https://medium.com"}
+
+// 	for _, url := range urls{
+// 		checkURL(url)
+// 		fmt.Println(strings.Repeat("*", 20))
+// 	}
 }
