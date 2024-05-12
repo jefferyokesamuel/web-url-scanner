@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"ioutil"
+	"io"
 	"strings"
 )
 
@@ -18,7 +18,7 @@ func checkURL(url string) {
 		defer resp.Body.Close()
 		fmt.Printf("%s -> status code is %d\n", url, resp.StatusCode)
 		if resp.StatusCode == 200 {
-			bodyBytes, err := ioutil.ReadAll(resp.Body)
+			bodyBytes, err := io.ReadAll(resp.Body)
 			file := strings.Split(url, "//")[1]
 			file += ".txt"
 
